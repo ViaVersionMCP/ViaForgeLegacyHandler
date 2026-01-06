@@ -1,0 +1,5 @@
+name: "ForgeLogger"
+version: "${version}"
+author: "HowardZHY"
+main: "com.viaversion.addons.legacyforge.ForgeChannelHandler"
+min-version: "3.4.0"

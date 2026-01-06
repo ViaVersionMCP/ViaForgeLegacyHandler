@@ -1,0 +1,16 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        maven {
+            name = "ViaVersion"
+            url = "https://repo.viaversion.com"
+        }
+    }
+}
+
+plugins {
+    id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
+}
+
+rootProject.name = "ForgeLogger"
