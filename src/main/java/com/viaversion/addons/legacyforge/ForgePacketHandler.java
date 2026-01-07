@@ -1,5 +1,6 @@
 package com.viaversion.addons.legacyforge;
 
+import com.viaversion.viaversion.api.connection.UserConnection;
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import com.viaversion.viaversion.api.protocol.remapper.PacketHandlers;
 import com.viaversion.viaversion.api.type.Types;
@@ -21,15 +22,21 @@ public class ForgePacketHandler extends PacketHandlers {
 
     public byte packetID;
 
-    public ForgeModList.ForgeVersion clientVersion;
+    public UserConnection connection;
 
     @Override
     protected void register() {
         handlerSoftFail(wrapper -> {
+            connection = wrapper.user();
             final String name = wrapper.get(Types.STRING, 0);
             if (name.contains("FML|HS")) {
                 byte[] newPayload = this.loadPayload(direction, wrapper.read(Types.REMAINING_BYTES));
                 wrapper.write(Types.REMAINING_BYTES, newPayload);
+            }
+            if (name.equals("FML")) {
+                if (this.shouldCancelPayload(wrapper.read(Types.REMAINING_BYTES))) {
+                    wrapper.cancel();
+                }
             }
         });
     }
@@ -59,5 +66,14 @@ public class ForgePacketHandler extends PacketHandlers {
             LOGGER.warn("Failed to parse Forge Payload", exception);
         }
         return buffer.array();
+    }
+
+    public boolean shouldCancelPayload(byte[] payload) {
+        if (payload == null || payload.length == 0) {
+            log(direction, "Empty Forge message payload", true);
+            return true;
+        } else {
+            return payload[0] == 3; // Removed since 1.9
+        }
     }
 }

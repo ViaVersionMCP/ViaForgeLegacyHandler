@@ -1,4 +1,4 @@
-name: "ForgeLogger"
+name: "LegacyForgeHandler"
 version: "${version}"
 author: "HowardZHY"
 main: "com.viaversion.addons.legacyforge.ForgeChannelHandler"

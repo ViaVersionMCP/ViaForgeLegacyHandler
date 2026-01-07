@@ -1,5 +1,6 @@
 package com.viaversion.addons.legacyforge;
 
+import com.viaversion.viaversion.api.connection.StorableObject;
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import io.netty.buffer.ByteBuf;
 
@@ -21,8 +22,11 @@ public class ForgeModList extends ForgePayload {
         for (int i = 0; i < modCount; i++) {
             String modId = readString(buffer);
             String version = readString(buffer);
-            if (direction == Direction.SERVERBOUND && (modId.equals("Forge") || modId.equals("forge"))) {
-                this.handler.clientVersion = ForgeVersion.from(version);
+            if (modId.equals("Forge") || modId.equals("forge")) {
+                if (direction == Direction.SERVERBOUND) {
+                    LOGGER.info("Client Forge Version:" + version);
+                    this.handler.connection.put(ForgeVersion.from(version));
+                }
             }
             mods.add(modId + "@" + version);
         }
@@ -38,7 +42,7 @@ public class ForgeModList extends ForgePayload {
         return "ModList mods=" + mods + " count=" + modCount;
     }
 
-    public enum ForgeVersion {
+    public enum ForgeVersion implements StorableObject {
         V7, V8, V9, V11, V12;
 
         public String version;

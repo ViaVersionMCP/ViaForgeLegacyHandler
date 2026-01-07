@@ -31,10 +31,6 @@ public class ForgePayload {
         return buffer;
     }
 
-    public void log(final String message, final boolean warn) {
-        log(this.direction, message, warn);
-    }
-
     public static int readVarInt(final ByteBuf buffer) {
         int numRead = 0;
         int result = 0;
