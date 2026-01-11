@@ -11,14 +11,11 @@ import static com.viaversion.addons.legacyforge.ForgePayload.*;
 
 public class ForgePacketHandler extends PacketHandlers {
 
-    public ForgePacketHandler(Direction direction, int flag) {
+    public ForgePacketHandler(Direction direction) {
         this.direction = direction;
-        this.flag = flag;
     }
 
     public Direction direction;
-
-    public int flag;
 
     public byte packetID;
 

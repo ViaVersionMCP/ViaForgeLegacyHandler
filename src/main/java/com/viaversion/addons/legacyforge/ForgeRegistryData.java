@@ -59,7 +59,7 @@ public class ForgeRegistryData extends ForgePayload {
     @Override
     public ByteBuf write() {
         if (version == ForgeModList.ForgeVersion.V0809) {
-            LOGGER.info("Didn't rewrite for actually 1.8 client");
+            LOGGER.info("Didn't rewrite for actually 1.8 client (stacking)");
             return super.write();
         }
         if (this.registryType == RegistryTypes.ITEMS) {
@@ -68,9 +68,6 @@ public class ForgeRegistryData extends ForgePayload {
                 Map<String, Integer> recipes = ForgeRegistryData.RegistryDatas.recipes;
                 return writeData(false, RegistryTypes.RECIPES, recipes.size(), recipes);
             } // Trick 1.12.2 Forge Instead
-            if (handler.flag == 0) {
-                return writeData(false, RegistryTypes.ITEMS, idCount - removeCount, idMap);
-            }
             return writeData(hasMore, RegistryTypes.ITEMS, idCount - removeCount, idMap);
         }
         return super.write();

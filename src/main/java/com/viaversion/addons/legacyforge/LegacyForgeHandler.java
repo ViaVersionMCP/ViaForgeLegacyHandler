@@ -17,9 +17,9 @@ public class LegacyForgeHandler {
         if (protocol8 == null || protocol7 == null) {
             throw new IllegalStateException();
         }
-        protocol8.appendClientbound(ClientboundPackets1_8.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.CLIENTBOUND, 1));
-        protocol8.appendServerbound(ServerboundPackets1_9.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.SERVERBOUND, 1));
-        protocol7.appendClientbound(ClientboundPackets1_7_2.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.CLIENTBOUND, 0));
-        protocol7.appendServerbound(ServerboundPackets1_8.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.SERVERBOUND, 0));
+        protocol8.appendClientbound(ClientboundPackets1_8.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.CLIENTBOUND));
+        protocol8.appendServerbound(ServerboundPackets1_9.CUSTOM_PAYLOAD, new ForgePacketHandler(Direction.SERVERBOUND));
+        protocol7.appendClientbound(ClientboundPackets1_7_2.CUSTOM_PAYLOAD, new ForgePacketHandlerLegacy(Direction.CLIENTBOUND));
+        protocol7.appendServerbound(ServerboundPackets1_8.CUSTOM_PAYLOAD, new ForgePacketHandlerLegacy(Direction.SERVERBOUND));
     }
 }
