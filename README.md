@@ -1,3 +1,2 @@
-ViaProxy addon to analyse pre-1.12.2 Forge Payload Packets.
-
-Currently fixes 1.9+ Forge clients joining 1.8.9 Forge servers.
+# ViaProxyPassthrough
+[ViaProxy](https://github.com/RaphiMC/ViaProxy) plugin that allows certain modern version and below to be passthrough.

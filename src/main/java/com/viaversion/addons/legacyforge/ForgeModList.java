@@ -43,7 +43,7 @@ public class ForgeModList extends ForgePayload {
     }
 
     public enum ForgeVersion implements StorableObject {
-        V7, V8, V9, V11, V12;
+        V0710, V0809, V0900, V1100, V1200, V1202;
 
         public String version;
 
@@ -55,11 +55,17 @@ public class ForgeModList extends ForgePayload {
         public static ForgeVersion from(String versionIn) {
             ForgeVersion fv;
             switch (versionIn.substring(0, 2)) {
-                case "10" -> fv = V7;
-                case "11" -> fv = V8;
-                case "12" -> fv = V9;
-                case "13" -> fv = V11;
-                case "14" -> fv = V12;
+                case "10" -> fv = V0710;
+                case "11" -> fv = V0809;
+                case "12" -> fv = V0900;
+                case "13" -> fv = V1100;
+                case "14" -> {
+                    if (Integer.parseInt(versionIn.substring(versionIn.lastIndexOf('.') + 1)) < 2676) {
+                        fv = V1200;
+                    } else {
+                        fv = V1202;
+                    }
+                }
                 default -> throw new IllegalArgumentException();
             }
             return fv.set(versionIn);

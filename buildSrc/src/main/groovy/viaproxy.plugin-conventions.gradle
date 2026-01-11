@@ -1,0 +1,22 @@
+plugins {
+    id "java-library"
+    id "base.base-conventions"
+    id "base.include-in-jar-configuration"
+    id "viaproxy.run-with-viaproxy-task"
+}
+
+repositories {
+    maven {
+        name = "ViaVersion"
+        url = "https://repo.viaversion.com"
+    }
+}
+
+processResources {
+    inputs.property("version", project.version)
+
+    def projectVersion = project.version
+    filesMatching("viaproxy.yml") {
+        expand("version": projectVersion)
+    }
+}

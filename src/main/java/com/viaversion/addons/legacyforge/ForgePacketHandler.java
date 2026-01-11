@@ -11,18 +11,20 @@ import static com.viaversion.addons.legacyforge.ForgePayload.*;
 
 public class ForgePacketHandler extends PacketHandlers {
 
-    public ForgePacketHandler(Direction direction, boolean legacy) {
+    public ForgePacketHandler(Direction direction, int flag) {
         this.direction = direction;
-        this.legacy = legacy;
+        this.flag = flag;
     }
 
     public Direction direction;
 
-    public boolean legacy;
+    public int flag;
 
     public byte packetID;
 
     public UserConnection connection;
+
+    public ForgePayload type;
 
     @Override
     protected void register() {
@@ -31,7 +33,11 @@ public class ForgePacketHandler extends PacketHandlers {
             final String name = wrapper.get(Types.STRING, 0);
             if (name.contains("FML|HS")) {
                 byte[] newPayload = this.loadPayload(direction, wrapper.read(Types.REMAINING_BYTES));
-                wrapper.write(Types.REMAINING_BYTES, newPayload);
+                if (this.shouldCancelPayload()) {
+                    wrapper.cancel();
+                } else {
+                    wrapper.write(Types.REMAINING_BYTES, newPayload);
+                }
             }
             if (name.equals("FML")) {
                 if (this.shouldCancelPayload(wrapper.read(Types.REMAINING_BYTES))) {
@@ -52,20 +58,27 @@ public class ForgePacketHandler extends PacketHandlers {
                 log(direction, "Unreadable Forge handshake payload", true);
                 return buffer.array();
             }
-            packetID = buffer.readByte();
-            ForgePayload type;
+            this.packetID = buffer.readByte();
             switch (packetID) {
-                case 2 -> type = new ForgeModList();
-                case 3 -> type = new ForgeRegistryData();
-                default -> type = new ForgeHandshakes();
+                case 2 -> this.type = new ForgeModList();
+                case 3 -> this.type = new ForgeRegistryData();
+                default -> this.type = new ForgeHandshakes();
             }
-            type.read(this, buffer, direction, packetID);
+            this.type.read(this, buffer, direction, packetID);
             log(direction, type.toString(), false);
-            return type.write().array();
+            return this.type.write().array();
         } catch (RuntimeException exception) {
             LOGGER.warn("Failed to parse Forge Payload", exception);
         }
         return buffer.array();
+    }
+
+    public boolean shouldCancelPayload() {
+        if (this.type != null) {
+            return this.type.shouldCancelPayload();
+        } else {
+            return false;
+        }
     }
 
     public boolean shouldCancelPayload(byte[] payload) {

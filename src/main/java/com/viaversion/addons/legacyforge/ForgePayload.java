@@ -31,6 +31,10 @@ public class ForgePayload {
         return buffer;
     }
 
+    public boolean shouldCancelPayload() {
+        return false;
+    }
+
     public static int readVarInt(final ByteBuf buffer) {
         int numRead = 0;
         int result = 0;
