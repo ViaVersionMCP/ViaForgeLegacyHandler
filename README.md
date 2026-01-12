@@ -2,4 +2,8 @@
 
 Analyse pre-1.12.2 Forge Payload Packets.
 
-Target: try to fix joining of 1.9~1.12.2 Forge clients on 1.8.9 Forge server and 1.8+ Forge client on 1.7.10 Forge server.
+Targets:
+- [x] 1.9~1.12.2 Forge Client to 1.8.9 Forge Server
+- [ ] 1.12.2 Forge Client to 1.10.2 Forge Server `Unidentified mapping from registry minecraft:soundevents minecraft:entity.experience_orb.touch: 196`
+- [ ] 1.8.9~1.12.2 Forge Client to 1.7.10 Forge Server
+- [ ] FINAL: 1.8+ Vanilla Clients to 1.7.10 Forge Server
