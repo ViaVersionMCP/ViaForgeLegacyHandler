@@ -15,8 +15,8 @@ public class ForgeModList extends ForgePayload {
     public ForgeModList() {}
 
     @Override
-    public void read(ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
-        super.read(handler, buffer, direction, packetID);
+    public void read(boolean legacy, ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
+        super.read(legacy, handler, buffer, direction, packetID);
         modCount = readVarInt(buffer);
         mods = new ArrayList<>(modCount);
         for (int i = 0; i < modCount; i++) {

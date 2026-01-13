@@ -1,6 +1,7 @@
 package com.viaversion.addons.legacyforge;
 
 import com.viaversion.viaversion.api.protocol.packet.Direction;
+import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
 import io.netty.buffer.*;
 import org.apache.logging.log4j.*;
 
@@ -9,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 public class ForgePayload {
 
     public static final Logger LOGGER = LogManager.getLogger("Forge-Payload");
+
+    public boolean legacy;
 
     public ForgePacketHandler handler;
 
@@ -20,7 +23,8 @@ public class ForgePayload {
 
     public ForgePayload() {}
 
-    public void read(ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
+    public void read(boolean legacy, ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
+        this.legacy = legacy;
         this.handler = handler;
         this.buffer = buffer;
         this.direction = direction;
@@ -31,8 +35,8 @@ public class ForgePayload {
         return buffer;
     }
 
-    public boolean shouldCancelPayload() {
-        return false;
+    public boolean shouldRewrite(PacketWrapper wrapper) {
+        return true;
     }
 
     public static int readVarInt(final ByteBuf buffer) {
@@ -89,11 +93,11 @@ public class ForgePayload {
         }
     }
 
-    public static void log(final Direction direction, final String message, final boolean warn) {
+    public static void log(final String prefix, final Direction direction, final String message, final boolean warn) {
         if (warn) {
-            LOGGER.warn("[ForgePayload] {}: {}", direction, message);
+            LOGGER.warn("[{}] {}: {}", prefix, direction, message);
         } else {
-            LOGGER.info("[ForgePayload] {}: {}", direction, message);
+            LOGGER.info("[{}] {}: {}", prefix, direction, message);
         }
     }
 

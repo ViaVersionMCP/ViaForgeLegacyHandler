@@ -14,8 +14,8 @@ public class ForgeHandshakes extends ForgePayload {
     }
 
     @Override
-    public void read(ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
-        super.read(handler, buffer, direction, packetID);
+    public void read(boolean legacy, ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
+        super.read(legacy, handler, buffer, direction, packetID);
         additionalData = "None";
         switch (packetID) {
             case -2:
