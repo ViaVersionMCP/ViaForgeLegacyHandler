@@ -3,9 +3,9 @@ package com.viaversion.addons.legacyforge;
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import com.viaversion.viaversion.api.type.Types;
 
-public class ForgePacketHandlerVintage extends ForgePacketHandler {
+public class ForgePacketHandlerNewer extends ForgePacketHandler {
 
-    public ForgePacketHandlerVintage(Direction direction) {
+    public ForgePacketHandlerNewer(Direction direction) {
         super(direction);
     }
 

@@ -15,10 +15,9 @@ public class RegistryDatas {
 
     public static List<String> removeList = new ArrayList<>();
 
-    public static List<Integer> removeListID = new ArrayList<>();
-
     static {
         removeList.add("minecraft:lit_furnace");
+        removeList.add("minecraft:entity.experience_orb.touch");
     }
 
     static void init() {

@@ -59,7 +59,15 @@ public class ForgePacketHandler extends PacketHandlers {
             this.packetID = buffer.readByte();
             switch (packetID) {
                 case 2 -> this.type = new ForgeModList();
-                case 3 -> this.type = new ForgeRegistryData();
+                case 3 -> {
+                    if (this instanceof ForgePacketHandlerLegacy) {
+                        this.type = new ForgeRegistryDataLegacy();
+                    } else if (this instanceof ForgePacketHandlerNewer) {
+                        this.type = new ForgeRegistryDataNewer();
+                    } else {
+                        this.type = new ForgeRegistryDataVintage();
+                    }
+                }
                 default -> this.type = new ForgeHandshakes();
             }
             this.type.read(legacy, this, buffer, direction, packetID);
