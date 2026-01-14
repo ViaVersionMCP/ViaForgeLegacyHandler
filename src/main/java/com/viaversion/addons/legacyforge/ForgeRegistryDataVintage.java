@@ -11,9 +11,12 @@ import java.util.Map;
 
 public class ForgeRegistryDataVintage extends ForgeRegistryData {
 
+    private ForgeModList.ForgeVersion version;
+
     @Override
     public void read(boolean legacy, ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
         super.read(legacy, handler, buffer, direction, packetID);
+        version = this.handler.connection.get(ForgeModList.ForgeVersion.class);
         hasMore = buffer.readBoolean();
         registryType = RegistryTypes.from(readString(buffer));
         idCount = readVarInt(buffer);

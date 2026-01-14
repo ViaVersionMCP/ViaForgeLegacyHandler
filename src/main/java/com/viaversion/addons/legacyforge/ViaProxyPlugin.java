@@ -14,7 +14,7 @@ public class ViaProxyPlugin extends net.raphimc.viaproxy.plugins.ViaProxyPlugin 
 
     @EventHandler
     public void onViaLoading(final ViaLoadingEvent event) {
-        LegacyForgeHandler.init();
+        LegacyForgeHandlerAddon.init();
     }
 
 }

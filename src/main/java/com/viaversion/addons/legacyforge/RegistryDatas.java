@@ -445,16 +445,16 @@ public class RegistryDatas {
 
     static void addRecipes() {
         //recipes.put("minecraft:armordye", 0);
-        //recipes.put("minecraft:bookcloning", 1);
-        //recipes.put("minecraft:mapcloning", 2);
-        //recipes.put("minecraft:mapextending", 3);
-        //recipes.put("minecraft:fireworks", 4);
-        //recipes.put("minecraft:repairitem", 5);
-        //recipes.put("minecraft:tippedarrow", 6);
-        //recipes.put("minecraft:bannerduplicate", 7);
-        //recipes.put("minecraft:banneraddpattern", 8);
-        //recipes.put("minecraft:shielddecoration", 9);
-        //recipes.put("minecraft:shulkerboxcoloring", 10);
+        recipes.put("minecraft:bookcloning", 1);
+        recipes.put("minecraft:mapcloning", 2);
+        recipes.put("minecraft:mapextending", 3);
+        recipes.put("minecraft:fireworks", 4);
+        recipes.put("minecraft:repairitem", 5);
+        recipes.put("minecraft:tippedarrow", 6);
+        recipes.put("minecraft:bannerduplicate", 7);
+        recipes.put("minecraft:banneraddpattern", 8);
+        recipes.put("minecraft:shielddecoration", 9);
+        recipes.put("minecraft:shulkerboxcoloring", 10);
         recipes.put("minecraft:yellow_wool", 11);
         recipes.put("minecraft:yellow_stained_hardened_clay", 12);
         recipes.put("minecraft:yellow_stained_glass_pane", 13);

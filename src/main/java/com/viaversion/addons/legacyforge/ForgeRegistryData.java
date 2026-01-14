@@ -9,8 +9,6 @@ import java.util.*;
 
 public abstract class ForgeRegistryData extends ForgePayload {
 
-    protected ForgeModList.ForgeVersion version;
-
     public boolean hasMore;
 
     public RegistryTypes registryType;
@@ -28,7 +26,6 @@ public abstract class ForgeRegistryData extends ForgePayload {
     @Override
     public void read(boolean legacy, ForgePacketHandler handler, ByteBuf buffer, Direction direction, byte packetID) {
         super.read(legacy, handler, buffer, direction, packetID);
-        version = this.handler.connection.get(ForgeModList.ForgeVersion.class);
     }
 
     @Override
@@ -36,7 +33,7 @@ public abstract class ForgeRegistryData extends ForgePayload {
         return super.write();
     }
 
-    public ByteBuf writeData(boolean more, RegistryTypes types, int counts, Map<String, Integer> registry) {
+    public static ByteBuf writeData(boolean more, RegistryTypes types, int counts, Map<String, Integer> registry) {
         ByteBuf rewrite = Unpooled.buffer();
         rewrite.writeByte(3);
         rewrite.writeBoolean(more);

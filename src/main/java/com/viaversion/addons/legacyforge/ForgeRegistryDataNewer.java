@@ -1,6 +1,7 @@
 package com.viaversion.addons.legacyforge;
 
 import com.viaversion.viaversion.api.protocol.packet.Direction;
+import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
 import io.netty.buffer.ByteBuf;
 
 public class ForgeRegistryDataNewer extends ForgeRegistryData {
@@ -45,10 +46,14 @@ public class ForgeRegistryDataNewer extends ForgeRegistryData {
     }
 
     @Override
+    public boolean shouldRewrite(PacketWrapper wrapper) {
+        return true;
+    }
+
+    @Override
     public boolean shouldRemove(RegistryTypes type, String entry, int id) {
-        ForgeModList.ForgeVersion version = handler.connection.get(ForgeModList.ForgeVersion.class);
-        if (version != null && version.ordinal() >= ForgeModList.ForgeVersion.V1200.ordinal()) {
-            if (type == RegistryTypes.SOUNDS && (RegistryDatas.removeList.contains(entry))) {
+        if (type == RegistryTypes.SOUNDS) {
+            if (RegistryDatas.removeList.contains(entry)) {
                 LOGGER.info("Removing registry {} entry: {}", registryType, entry);
                 return true;
             }
