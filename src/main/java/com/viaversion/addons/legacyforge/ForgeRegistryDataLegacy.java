@@ -24,13 +24,13 @@ public class ForgeRegistryDataLegacy extends ForgeRegistryData {
         substitutionCount = readVarInt(buffer);
         for (int i = 0; i < substitutionCount; i++) {
             String substitution = readString(buffer);
-            LOGGER.info("Subs: " + substitution);
+            LOGGER.info("Blocks: " + substitution);
             substitutionList.add(substitution);
         }
         dummyCount = readVarInt(buffer);
         for (int i = 0; i < dummyCount; i++) {
             String dummy = readString(buffer);
-            LOGGER.info("Dummy: " + dummy);
+            LOGGER.info("Items: " + dummy);
             dummyList.add(dummy);
         }
     }

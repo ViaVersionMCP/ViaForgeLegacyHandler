@@ -57,19 +57,7 @@ public class ForgePacketHandler extends PacketHandlers {
                 return buffer.array();
             }
             this.packetID = buffer.readByte();
-            switch (packetID) {
-                case 2 -> this.type = new ForgeModList();
-                case 3 -> {
-                    if (this instanceof ForgePacketHandlerLegacy) {
-                        this.type = new ForgeRegistryDataLegacy();
-                    } else if (this instanceof ForgePacketHandlerNewer) {
-                        this.type = new ForgeRegistryDataNewer();
-                    } else {
-                        this.type = new ForgeRegistryDataVintage();
-                    }
-                }
-                default -> this.type = new ForgeHandshakes();
-            }
+            this.type = this.getType();
             this.type.read(legacy, this, buffer, direction, packetID);
             log(this.toString(), direction, type.toString(), false);
             return this.type.write().array();
@@ -77,6 +65,20 @@ public class ForgePacketHandler extends PacketHandlers {
             LOGGER.warn("Failed to parse Forge Payload", exception);
         }
         return buffer.array();
+    }
+
+    public ForgePayload getType() {
+        switch (this.packetID) {
+            case 2 -> {
+                return new ForgeModList();
+            }
+            case 3 -> {
+                return new ForgeRegistryDataVintage();
+            }
+            default -> {
+                return new ForgeHandshakes();
+            }
+        }
     }
 
     public boolean onCallback(PacketWrapper wrapper) {

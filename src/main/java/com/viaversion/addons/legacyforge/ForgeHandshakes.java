@@ -38,21 +38,7 @@ public class ForgeHandshakes extends ForgePayload {
 
     @Override
     public ByteBuf write() {
-        ByteBuf out = Unpooled.buffer();
-        switch (this.packetID) {
-            case -1:
-                out.writeByte(this.packetID);
-                out.writeByte(this.firstData);
-                return out;
-            case 0:
-                out.writeByte(this.packetID);
-                out.writeByte(this.firstData);
-                Integer i = parseInt(additionalData);
-                if (i != null) {
-                    out.writeInt(i);
-                }
-            default: return super.write();
-        }
+        return super.write();
     }
 
     @Override

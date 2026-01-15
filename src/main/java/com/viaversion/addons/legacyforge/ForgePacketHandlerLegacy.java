@@ -22,6 +22,21 @@ public class ForgePacketHandlerLegacy extends ForgePacketHandler {
     }
 
     @Override
+    public ForgePayload getType() {
+        switch (this.packetID) {
+            case 2 -> {
+                return new ForgeModList();
+            }
+            case 3 -> {
+                return new ForgeRegistryDataLegacy();
+            }
+            default -> {
+                return new ForgeHandshakes();
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return "1.7<->1.8";
     }

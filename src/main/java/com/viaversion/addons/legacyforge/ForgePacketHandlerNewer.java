@@ -24,6 +24,21 @@ public class ForgePacketHandlerNewer extends ForgePacketHandler {
     }
 
     @Override
+    public ForgePayload getType() {
+        switch (this.packetID) {
+            case 2 -> {
+                return new ForgeModList();
+            }
+            case 3 -> {
+                return new ForgeRegistryDataNewer();
+            }
+            default -> {
+                return new ForgeHandshakes();
+            }
+        }
+    }
+
+    @Override
     public String toString() {
         return "1.11<->1.12";
     }
