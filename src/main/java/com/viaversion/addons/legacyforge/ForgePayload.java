@@ -85,14 +85,6 @@ public class ForgePayload {
         buf.writeBytes(bytes);
     }
 
-    public static Integer parseInt(final String in) {
-        try {
-            return Integer.parseInt(in);
-        } catch (NumberFormatException ignored) {
-            return null;
-        }
-    }
-
     public static void log(final String prefix, final Direction direction, final String message, final boolean warn) {
         if (warn) {
             LOGGER.warn("[{}] {}: {}", prefix, direction, message);

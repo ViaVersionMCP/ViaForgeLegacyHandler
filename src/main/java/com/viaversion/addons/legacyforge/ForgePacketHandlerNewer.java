@@ -13,11 +13,19 @@ public class ForgePacketHandlerNewer extends ForgePacketHandler {
     protected void register() {
         handlerSoftFail(wrapper -> {
             connection = wrapper.user();
-            final String name = wrapper.get(Types.STRING, 0);
-            if (name.contains(CHANNEL)) {
-                byte[] newPayload = this.loadPayload(false, direction, wrapper.read(Types.REMAINING_BYTES));
-                if (this.onCallback(wrapper)) {
-                    wrapper.write(Types.REMAINING_BYTES, newPayload);
+            if (this.direction == Direction.SERVERBOUND) {
+                final String name = wrapper.passthrough(Types.STRING);
+                if (name.contains(CHANNEL)) {
+                    byte[] newPayload = this.loadPayload(false, direction, wrapper.read(Types.SERVERBOUND_CUSTOM_PAYLOAD_DATA));
+                    wrapper.write(Types.SERVERBOUND_CUSTOM_PAYLOAD_DATA, newPayload);
+                }
+            } else {
+                final String name = wrapper.get(Types.STRING, 0);
+                if (name.contains(CHANNEL)) {
+                    byte[] newPayload = this.loadPayload(false, direction, wrapper.read(Types.REMAINING_BYTES));
+                    if (this.onCallback(wrapper)) {
+                        wrapper.write(Types.REMAINING_BYTES, newPayload);
+                    }
                 }
             }
         });
