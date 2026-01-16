@@ -7,7 +7,9 @@ import java.util.Map;
 
 public class RegistryDatas {
 
-    public static boolean init = false;
+    public static boolean initItems = false;
+
+    public static boolean initRecipes = false;
 
     public static Map<String, Integer> items = new HashMap<>();
 
@@ -20,13 +22,20 @@ public class RegistryDatas {
         removeList.add("minecraft:entity.experience_orb.touch");
     }
 
-    static void init() {
-        if (init) {
-            return;
+    public static Map<String, Integer> initItems() {
+        if (!initItems) {
+            addItems();
         }
-        init = true;
-        addItems();
-        addRecipes();
+        initItems = true;
+        return items;
+    }
+
+    public static Map<String, Integer> initRecipes() {
+        if (!initRecipes) {
+            addRecipes();
+        }
+        initRecipes = true;
+        return recipes;
     }
 
     static void addItems() {

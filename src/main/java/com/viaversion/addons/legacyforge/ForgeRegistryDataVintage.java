@@ -2,12 +2,7 @@ package com.viaversion.addons.legacyforge;
 
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
-import com.viaversion.viaversion.api.type.Types;
-import com.viaversion.viaversion.protocols.v1_8to1_9.Protocol1_8To1_9;
-import com.viaversion.viaversion.protocols.v1_8to1_9.packet.ClientboundPackets1_8;
 import io.netty.buffer.ByteBuf;
-
-import java.util.Map;
 
 public class ForgeRegistryDataVintage extends ForgeRegistryData {
 
@@ -59,22 +54,6 @@ public class ForgeRegistryDataVintage extends ForgeRegistryData {
 
     @Override
     public boolean shouldRewrite(PacketWrapper wrapper) {
-        if (version == ForgeModList.ForgeVersion.V1202) {
-            if (this.registryType == RegistryTypes.ITEMS) {
-                RegistryDatas.init();
-                Map<String, Integer> items = RegistryDatas.items;
-                Map<String, Integer> recipes = RegistryDatas.recipes;
-                wrapper.write(Types.REMAINING_BYTES, writeData(true, RegistryTypes.ITEMS, items.size(), items).array());
-                LOGGER.info("Resending Item Registry for 1.12.2.");
-                wrapper.send(Protocol1_8To1_9.class);
-                PacketWrapper recipePacket = PacketWrapper.create(ClientboundPackets1_8.CUSTOM_PAYLOAD, handler.connection);
-                recipePacket.write(Types.STRING, ForgePacketHandler.CHANNEL);
-                recipePacket.write(Types.REMAINING_BYTES, writeData(false, RegistryTypes.RECIPES, recipes.size(), recipes).array());
-                recipePacket.send(Protocol1_8To1_9.class, false);
-                LOGGER.info("Sending Recipes Registry for 1.12.2.");
-                return false;
-            }
-        }
         return true;
     }
 
