@@ -36,6 +36,9 @@ public class ForgeRegistryDataLegacy extends ForgeRegistryData {
                     if (shouldRemove(registryType, name, id)) {
                         removeCount++;
                     } else {
+                        if (name.equals("minecraft:cooked_fished")) {
+                            name = "cooked_fish";
+                        }
                         itemIdMap.put(name, id);
                     }
                 }
