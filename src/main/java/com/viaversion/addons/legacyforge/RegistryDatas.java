@@ -17,9 +17,23 @@ public class RegistryDatas {
 
     public static List<String> removeList = new ArrayList<>();
 
+    public static List<String> removeListLegacy = new ArrayList<>();
+
     static {
         removeList.add("minecraft:lit_furnace");
         removeList.add("minecraft:entity.experience_orb.touch");
+        removeListLegacy.add("minecraft:flowing_water");
+        removeListLegacy.add("minecraft:water");
+        removeListLegacy.add("minecraft:flowing_lava");
+        removeListLegacy.add("minecraft:lava");
+        removeListLegacy.add("minecraft:double_stone_slab");
+        removeListLegacy.add("minecraft:fire");
+        removeListLegacy.add("minecraft:portal");
+        removeListLegacy.add("minecraft:end_portal");
+        removeListLegacy.add("minecraft:double_wooden_slab");
+        removeListLegacy.add("minecraft:cocoa");
+        removeListLegacy.add("minecraft:carrots");
+        removeListLegacy.add("minecraft:potatoes");
     }
 
     public static Map<String, Integer> initItems() {

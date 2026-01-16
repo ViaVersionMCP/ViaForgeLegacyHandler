@@ -16,7 +16,9 @@ public class ForgePacketHandlerLegacy extends ForgePacketHandler {
             final String name = wrapper.get(Types.STRING, 0);
             if (name.contains(CHANNEL)) {
                 byte[] newPayload = this.loadPayload(true, direction, wrapper.read(Types.REMAINING_BYTES));
-                wrapper.write(Types.REMAINING_BYTES, newPayload);
+                if (this.onCallback(wrapper)) {
+                    wrapper.write(Types.REMAINING_BYTES, newPayload);
+                }
             }
         });
     }

@@ -59,7 +59,6 @@ public class ForgeRegistryDataVintage extends ForgeRegistryData {
 
     @Override
     public boolean shouldRemove(RegistryTypes type, String entry, int id) {
-        ForgeModList.ForgeVersion version = handler.connection.get(ForgeModList.ForgeVersion.class);
         if (version != null && version.ordinal() >= ForgeModList.ForgeVersion.V0900.ordinal()) {
             if (type == RegistryTypes.ITEMS && (RegistryDatas.removeList.contains(entry))) {
                 LOGGER.info("Removing registry {} entry: {}", registryType, entry);
