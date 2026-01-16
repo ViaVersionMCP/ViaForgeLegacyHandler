@@ -45,6 +45,11 @@ public class ForgeRegistryDataNewer extends ForgeRegistryData {
 
     @Override
     public ByteBuf write() {
+        if (this.registryType == RegistryTypes.ENTITIES) {
+            this.idMap.put("minecraft:parrot", 104);
+            this.idCount++;
+            return writeData(hasMore, RegistryTypes.ENTITIES, idCount, idMap);
+        }
         if (this.registryType == RegistryTypes.SOUNDS) {
             return writeData(hasMore, RegistryTypes.SOUNDS, idCount - removeCount, idMap);
         }
