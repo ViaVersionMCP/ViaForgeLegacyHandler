@@ -42,6 +42,7 @@ public class ForgePayload {
     }
 
     public boolean shouldHandleVanilla() {
+        //TODO: pre 1.13 Vanilla
         return this.handler.connection.getProtocolInfo().protocolVersion().newerThanOrEqualTo(ProtocolVersion.v1_13);
     }
 

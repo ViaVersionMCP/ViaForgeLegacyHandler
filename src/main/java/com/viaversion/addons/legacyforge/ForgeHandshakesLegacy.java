@@ -79,7 +79,7 @@ public class ForgeHandshakesLegacy extends ForgeHandshakes {
         mods.put("mcp", "9.05");
         mods.put("FML", "7.10.99.99");
         mods.put("Forge", "10.13.4.1614");
-        return mods;
+        return mods; //TODO: Custom Mods
     }
 
     public static class SimulatedClientStates implements StorableObject {}
