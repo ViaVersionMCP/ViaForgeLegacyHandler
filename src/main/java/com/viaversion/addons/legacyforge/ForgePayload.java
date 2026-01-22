@@ -2,6 +2,7 @@ package com.viaversion.addons.legacyforge;
 
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
+import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import io.netty.buffer.*;
 import org.apache.logging.log4j.*;
 
@@ -37,6 +38,10 @@ public class ForgePayload {
 
     public boolean shouldRewrite(PacketWrapper wrapper) {
         return true;
+    }
+
+    public boolean shouldHandleVanilla() {
+        return this.handler.connection.getProtocolInfo().protocolVersion().newerThanOrEqualTo(ProtocolVersion.v1_13);
     }
 
     public static int readVarInt(final ByteBuf buffer) {

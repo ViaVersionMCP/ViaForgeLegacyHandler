@@ -27,13 +27,13 @@ public class ForgePacketHandlerLegacy extends ForgePacketHandler {
     public ForgePayload getType() {
         switch (this.packetID) {
             case 2 -> {
-                return new ForgeModList();
+                return new ForgeModListLegacy();
             }
             case 3 -> {
                 return new ForgeRegistryDataLegacy();
             }
             default -> {
-                return new ForgeHandshakes();
+                return new ForgeHandshakesLegacy();
             }
         }
     }

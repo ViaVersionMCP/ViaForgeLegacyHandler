@@ -1,6 +1,7 @@
 package com.viaversion.addons.legacyforge;
 
 import com.viaversion.viaversion.api.protocol.packet.Direction;
+import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
 import io.netty.buffer.*;
 
 public class ForgeHandshakes extends ForgePayload {
@@ -39,6 +40,11 @@ public class ForgeHandshakes extends ForgePayload {
     @Override
     public ByteBuf write() {
         return super.write();
+    }
+
+    @Override
+    public boolean shouldRewrite(PacketWrapper wrapper) {
+        return super.shouldRewrite(wrapper);
     }
 
     @Override
