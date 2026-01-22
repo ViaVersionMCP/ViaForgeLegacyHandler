@@ -20,7 +20,6 @@ public class ForgeHandshakesLegacy extends ForgeHandshakes {
         if (this.direction == Direction.CLIENTBOUND) {
             if (this.shouldHandleVanilla()) {
                 this.handleVanillaClient();
-                return false;
             }
         }
         return super.shouldRewrite(wrapper);
@@ -37,9 +36,8 @@ public class ForgeHandshakesLegacy extends ForgeHandshakes {
             case 0 -> {
                 sendServerBound(connection, 1, firstData);
                 sendServerBound(connection, 2, null);
-                state.stage++;
             }
-            case -1 -> sendServerBound(connection, -1, firstData);
+            case -1 -> sendServerBound(connection, -1, (byte) (firstData + 2));
             default -> {}
         }
     }
@@ -84,8 +82,5 @@ public class ForgeHandshakesLegacy extends ForgeHandshakes {
         return mods;
     }
 
-    public static class SimulatedClientStates implements StorableObject {
-
-        public int stage = 0;
-    }
+    public static class SimulatedClientStates implements StorableObject {}
 }

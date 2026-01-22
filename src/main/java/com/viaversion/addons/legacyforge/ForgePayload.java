@@ -1,5 +1,6 @@
 package com.viaversion.addons.legacyforge;
 
+import com.viaversion.viaversion.api.Via;
 import com.viaversion.viaversion.api.protocol.packet.Direction;
 import com.viaversion.viaversion.api.protocol.packet.PacketWrapper;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
@@ -94,7 +95,9 @@ public class ForgePayload {
         if (warn) {
             LOGGER.warn("[{}] {}: {}", prefix, direction, message);
         } else {
-            LOGGER.info("[{}] {}: {}", prefix, direction, message);
+            if (Via.getManager().isDebug()) {
+                LOGGER.info("[{}] {}: {}", prefix, direction, message);
+            }
         }
     }
 

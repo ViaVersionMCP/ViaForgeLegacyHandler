@@ -65,7 +65,7 @@ public class ForgeRegistryDataLegacy extends ForgeRegistryData {
     @Override
     public boolean shouldRewrite(PacketWrapper wrapper) {
         if (version == ForgeModList.ForgeVersion.V0710) {
-            LOGGER.info("Didn't rewrite for actually 1.7 client (stacking)");
+            LOGGER.info("Didn't rewrite for simulated or actually 1.7 client (stacking)");
             return false;
         }
         PacketWrapper recipePacket = PacketWrapper.create(ClientboundPackets1_7_2.CUSTOM_PAYLOAD, handler.connection);

@@ -14,8 +14,7 @@ public class ForgeModListLegacy extends ForgeModList {
                 ForgeHandshakesLegacy.SimulatedClientStates state = connection.get(ForgeHandshakesLegacy.SimulatedClientStates.class);
                 if (state != null) {
                     ForgeHandshakesLegacy.sendServerBound(connection, -1, (byte) 2);
-                    state.stage++;
-                    return false;
+                    return super.shouldRewrite(wrapper);
                 }
                 LOGGER.warn("Shouldn't go here?");
             }
