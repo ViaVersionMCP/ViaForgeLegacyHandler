@@ -47,7 +47,6 @@ public class ForgePacketHandler extends PacketHandlers {
 
     public byte[] loadPayload(final boolean legacy, final Direction direction, final byte[] payload) {
         if (payload == null || payload.length == 0) {
-            log(this.toString(), direction, "Empty Forge handshake payload", true);
             return payload;
         }
         ByteBuf buffer = Unpooled.wrappedBuffer(payload);
